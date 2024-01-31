@@ -2,6 +2,7 @@ package com.gracescorrner.demo.data.repository;
 
 import com.gracescorrner.demo.data.models.Post;
 import com.gracescorrner.demo.data.models.User;
+import com.gracescorrner.demo.dtos.requests.FindPostRequest;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;

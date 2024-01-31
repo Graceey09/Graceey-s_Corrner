@@ -17,7 +17,6 @@ import java.util.List;
 
 @Data
 @Document("Post")
-@ToString
 public class Post {
     @Id
     private String id;
@@ -28,8 +27,6 @@ public class Post {
     private String title;
 
     private String body;
-
-    private Comment comment;
 
     private User postedBy;
 }

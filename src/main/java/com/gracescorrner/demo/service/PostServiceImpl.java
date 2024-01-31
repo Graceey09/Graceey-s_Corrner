@@ -4,9 +4,11 @@ import com.gracescorrner.demo.data.models.Post;
 import com.gracescorrner.demo.data.models.User;
 import com.gracescorrner.demo.data.repository.PostRepository;
 import com.gracescorrner.demo.dtos.requests.*;
+import com.gracescorrner.demo.exceptions.NoSuchThingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,8 +22,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public Post deletePost(DeletePostRequest deletePostRequest) {
         FindPostRequest findPostRequest = new FindPostRequest();
-        findPostRequest.setAuthor(deletePostRequest.getUsername());
-        findPostRequest.setTitle(deletePostRequest.getTitle());
+        findPostRequest.setPostedBy(deletePostRequest.getPostedBy());
         Post foundPost = findPost(findPostRequest);
         postRepository.delete(foundPost);
         return foundPost;
@@ -41,12 +42,12 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Post findPost(FindPostRequest findPostRequest) {
-//        Optional<Post> foundPost = postRepository.findByPostedBy(findPostRequest.getAuthor());
+        Optional<Post> foundPost = postRepository.findByPostedBy(findPostRequest.getPostedBy());
         if (foundPost.isPresent()){
             return foundPost.get();
 
         }else {
-            throw new IllegalArgumentException("Post not found");
+            throw new NoSuchThingException("Post not found");
 
         }
     }

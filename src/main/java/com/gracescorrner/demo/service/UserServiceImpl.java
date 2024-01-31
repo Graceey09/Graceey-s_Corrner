@@ -19,8 +19,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private PostService postService;
     @Override
     public String registerWith(RegisterUserRequest registerUserRequest) {
         try {
@@ -29,12 +27,6 @@ public class UserServiceImpl implements UserService {
         }catch (DuplicateKeyException e){
             return "Username already taken";
         }
-    }
-
-    @Override
-    public Post createPost(CreatePostRequest createPostRequest) {
-        findByUsername(createPostRequest.getUsername());
-        return postService.createPost(createPostRequest);
     }
 
     @Override

@@ -7,6 +7,6 @@ import java.util.List;
 
 @Data
 public class FindPostRequest {
-    private String author;
+    private User postedBy;
     private String title;
 }
